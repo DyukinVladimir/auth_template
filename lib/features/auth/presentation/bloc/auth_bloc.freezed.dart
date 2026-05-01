@@ -28,7 +28,8 @@ mixin _$AuthBlocEvent {
     signUpWithEmail,
     required TResult Function() signOut,
     required TResult Function(String password) deleteAccount,
-    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function(String email, VoidCallback? onSuccess)
+    sendPasswordResetEmail,
     required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
@@ -40,7 +41,8 @@ mixin _$AuthBlocEvent {
     signUpWithEmail,
     TResult? Function()? signOut,
     TResult? Function(String password)? deleteAccount,
-    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) => throw _privateConstructorUsedError;
@@ -51,7 +53,8 @@ mixin _$AuthBlocEvent {
     signUpWithEmail,
     TResult Function()? signOut,
     TResult Function(String password)? deleteAccount,
-    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
@@ -203,7 +206,8 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
     signUpWithEmail,
     required TResult Function() signOut,
     required TResult Function(String password) deleteAccount,
-    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function(String email, VoidCallback? onSuccess)
+    sendPasswordResetEmail,
     required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
@@ -219,7 +223,8 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
     signUpWithEmail,
     TResult? Function()? signOut,
     TResult? Function(String password)? deleteAccount,
-    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
@@ -234,7 +239,8 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
     signUpWithEmail,
     TResult Function()? signOut,
     TResult Function(String password)? deleteAccount,
-    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
@@ -415,7 +421,8 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
     signUpWithEmail,
     required TResult Function() signOut,
     required TResult Function(String password) deleteAccount,
-    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function(String email, VoidCallback? onSuccess)
+    sendPasswordResetEmail,
     required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
@@ -431,7 +438,8 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
     signUpWithEmail,
     TResult? Function()? signOut,
     TResult? Function(String password)? deleteAccount,
-    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
@@ -446,7 +454,8 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
     signUpWithEmail,
     TResult Function()? signOut,
     TResult Function(String password)? deleteAccount,
-    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
@@ -576,7 +585,8 @@ class _$SignOutImpl implements _SignOut {
     signUpWithEmail,
     required TResult Function() signOut,
     required TResult Function(String password) deleteAccount,
-    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function(String email, VoidCallback? onSuccess)
+    sendPasswordResetEmail,
     required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
@@ -592,7 +602,8 @@ class _$SignOutImpl implements _SignOut {
     signUpWithEmail,
     TResult? Function()? signOut,
     TResult? Function(String password)? deleteAccount,
-    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
@@ -607,7 +618,8 @@ class _$SignOutImpl implements _SignOut {
     signUpWithEmail,
     TResult Function()? signOut,
     TResult Function(String password)? deleteAccount,
-    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
@@ -751,7 +763,8 @@ class _$DeleteAccountImpl implements _DeleteAccount {
     signUpWithEmail,
     required TResult Function() signOut,
     required TResult Function(String password) deleteAccount,
-    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function(String email, VoidCallback? onSuccess)
+    sendPasswordResetEmail,
     required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
@@ -767,7 +780,8 @@ class _$DeleteAccountImpl implements _DeleteAccount {
     signUpWithEmail,
     TResult? Function()? signOut,
     TResult? Function(String password)? deleteAccount,
-    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
@@ -782,7 +796,8 @@ class _$DeleteAccountImpl implements _DeleteAccount {
     signUpWithEmail,
     TResult Function()? signOut,
     TResult Function(String password)? deleteAccount,
-    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
@@ -862,7 +877,7 @@ abstract class _$$SendPasswordResetEmailImplCopyWith<$Res> {
     $Res Function(_$SendPasswordResetEmailImpl) then,
   ) = __$$SendPasswordResetEmailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email});
+  $Res call({String email, VoidCallback? onSuccess});
 }
 
 /// @nodoc
@@ -878,13 +893,17 @@ class __$$SendPasswordResetEmailImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? email = null}) {
+  $Res call({Object? email = null, Object? onSuccess = freezed}) {
     return _then(
       _$SendPasswordResetEmailImpl(
-        null == email
+        email: null == email
             ? _value.email
             : email // ignore: cast_nullable_to_non_nullable
                   as String,
+        onSuccess: freezed == onSuccess
+            ? _value.onSuccess
+            : onSuccess // ignore: cast_nullable_to_non_nullable
+                  as VoidCallback?,
       ),
     );
   }
@@ -893,14 +912,16 @@ class __$$SendPasswordResetEmailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SendPasswordResetEmailImpl implements _SendPasswordResetEmail {
-  const _$SendPasswordResetEmailImpl(this.email);
+  const _$SendPasswordResetEmailImpl({required this.email, this.onSuccess});
 
   @override
   final String email;
+  @override
+  final VoidCallback? onSuccess;
 
   @override
   String toString() {
-    return 'AuthBlocEvent.sendPasswordResetEmail(email: $email)';
+    return 'AuthBlocEvent.sendPasswordResetEmail(email: $email, onSuccess: $onSuccess)';
   }
 
   @override
@@ -908,11 +929,13 @@ class _$SendPasswordResetEmailImpl implements _SendPasswordResetEmail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SendPasswordResetEmailImpl &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email);
+  int get hashCode => Object.hash(runtimeType, email, onSuccess);
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -938,12 +961,13 @@ class _$SendPasswordResetEmailImpl implements _SendPasswordResetEmail {
     signUpWithEmail,
     required TResult Function() signOut,
     required TResult Function(String password) deleteAccount,
-    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function(String email, VoidCallback? onSuccess)
+    sendPasswordResetEmail,
     required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
   }) {
-    return sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(email, onSuccess);
   }
 
   @override
@@ -954,11 +978,12 @@ class _$SendPasswordResetEmailImpl implements _SendPasswordResetEmail {
     signUpWithEmail,
     TResult? Function()? signOut,
     TResult? Function(String password)? deleteAccount,
-    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
-    return sendPasswordResetEmail?.call(email);
+    return sendPasswordResetEmail?.call(email, onSuccess);
   }
 
   @override
@@ -969,13 +994,14 @@ class _$SendPasswordResetEmailImpl implements _SendPasswordResetEmail {
     signUpWithEmail,
     TResult Function()? signOut,
     TResult Function(String password)? deleteAccount,
-    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
   }) {
     if (sendPasswordResetEmail != null) {
-      return sendPasswordResetEmail(email);
+      return sendPasswordResetEmail(email, onSuccess);
     }
     return orElse();
   }
@@ -1030,10 +1056,13 @@ class _$SendPasswordResetEmailImpl implements _SendPasswordResetEmail {
 }
 
 abstract class _SendPasswordResetEmail implements AuthBlocEvent {
-  const factory _SendPasswordResetEmail(final String email) =
-      _$SendPasswordResetEmailImpl;
+  const factory _SendPasswordResetEmail({
+    required final String email,
+    final VoidCallback? onSuccess,
+  }) = _$SendPasswordResetEmailImpl;
 
   String get email;
+  VoidCallback? get onSuccess;
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1095,7 +1124,8 @@ class _$SendEmailVerificationImpl implements _SendEmailVerification {
     signUpWithEmail,
     required TResult Function() signOut,
     required TResult Function(String password) deleteAccount,
-    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function(String email, VoidCallback? onSuccess)
+    sendPasswordResetEmail,
     required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
@@ -1111,7 +1141,8 @@ class _$SendEmailVerificationImpl implements _SendEmailVerification {
     signUpWithEmail,
     TResult? Function()? signOut,
     TResult? Function(String password)? deleteAccount,
-    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
@@ -1126,7 +1157,8 @@ class _$SendEmailVerificationImpl implements _SendEmailVerification {
     signUpWithEmail,
     TResult Function()? signOut,
     TResult Function(String password)? deleteAccount,
-    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
@@ -1278,7 +1310,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     signUpWithEmail,
     required TResult Function() signOut,
     required TResult Function(String password) deleteAccount,
-    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function(String email, VoidCallback? onSuccess)
+    sendPasswordResetEmail,
     required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
@@ -1294,7 +1327,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     signUpWithEmail,
     TResult? Function()? signOut,
     TResult? Function(String password)? deleteAccount,
-    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
@@ -1309,7 +1343,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     signUpWithEmail,
     TResult Function()? signOut,
     TResult Function(String password)? deleteAccount,
-    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function(String email, VoidCallback? onSuccess)?
+    sendPasswordResetEmail,
     TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),

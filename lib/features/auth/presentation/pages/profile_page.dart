@@ -157,16 +157,6 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 12),
               ],
-
-              _ProfileButton(
-                icon: Icons.lock_reset,
-                label: 'Сбросить пароль',
-                onPressed: () {
-                  if (user.email != null) {
-                    context.read<AuthBloc>().add(AuthBlocEvent.sendPasswordResetEmail(user.email!));
-                  }
-                },
-              ),
               const Spacer(),
               _ProfileButton(
                 icon: Icons.logout,

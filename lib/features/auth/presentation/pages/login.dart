@@ -199,6 +199,31 @@ class _LoginPageState extends State<LoginPage> {
                             ? 'Еще нет аккаунта? Зарегистрируйтесь'
                             : 'Уже есть аккаунт? Войдите'),
                       ),
+                      if (_authType == AuthType.login)
+                        Align(
+                          child: TextButton(
+                            onPressed: () {
+                              final email = _emailController.text.trim();
+                              if (email.isEmpty) return;
+
+                              context.read<AuthBloc>().add(
+                                AuthBlocEvent.sendPasswordResetEmail(
+                                  email: email,
+                                  onSuccess: () {
+                                    // Этот код выполнится ТОЛЬКО после успешной отправки письма
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Инструкции отправлены на почту!'),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: const Text('Забыли пароль?'),
+                          ),
+                        ),
                     ],
                   ),
                 ),

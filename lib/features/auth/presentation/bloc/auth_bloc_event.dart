@@ -24,9 +24,10 @@ class AuthBlocEvent with _$AuthBlocEvent {
   }) = _DeleteAccount;
 
   // Сброс пароля (отправка ссылки на почту)
-  const factory AuthBlocEvent.sendPasswordResetEmail(
-      String email,
-      ) = _SendPasswordResetEmail;
+  const factory AuthBlocEvent.sendPasswordResetEmail({
+    required String email,
+    VoidCallback? onSuccess, // Добавляем колбэк
+  }) = _SendPasswordResetEmail;
 
   // Отправка письма для подтверждения почты
   const factory AuthBlocEvent.sendEmailVerification() = _SendEmailVerification;

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:auth_template/core/exceptions/auth_exceptions.dart';
 import 'package:auth_template/features/auth/domain/repo/auth_repo_abstract.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -38,9 +40,10 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
             return _repo.deleteAccount(e.password);
           }),
 
-          sendPasswordResetEmail: (e) => _handleAuthTask(emit,
-                () => _repo.sendPasswordResetEmail(e.email),
-          ),
+          sendPasswordResetEmail: (e) => _handleAuthTask(emit, () async {
+            await _repo.sendPasswordResetEmail(e.email);
+            e.onSuccess?.call(); // Вызываем только при успехе
+          }),
 
           sendEmailVerification: (e) => _handleAuthTask(emit,
                 () => _repo.sendEmailVerification(),
