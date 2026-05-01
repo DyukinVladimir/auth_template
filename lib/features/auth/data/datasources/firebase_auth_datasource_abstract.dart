@@ -1,4 +1,3 @@
-import 'package:auth_template/core/exceptions/auth_exceptions.dart';
 
 import '../model/user_model.dart';
 
@@ -17,20 +16,11 @@ abstract class FirebaseAuthRemoteDataSourceAbst {
 
   Future<void> signOut();
 
-  Future<void> deleteAccount();
+  Future<void> deleteAccount(String password);
 
   Future<void> reloadUser();
 
-  Future<void> sendPhoneCode(
-      String phoneNumber, {
-        required void Function(String verificationId) codeSent,
-        required void Function(AuthException e) onError,
-      });
-
-  Future<UserModel> verifySmsCode({
-    required String verificationId,
-    required String smsCode,
-  });
+  Future<void> reauthenticate(String password);
 
   Future<UserModel> updateProfile({String? displayName, String? photoUrl});
 }

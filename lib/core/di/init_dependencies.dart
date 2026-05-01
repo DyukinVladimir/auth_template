@@ -3,6 +3,7 @@ import 'package:auth_template/features/auth/data/datasources/firebase_auth_remot
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
+import 'package:logger/logger.dart';
 
 import '../../features/auth/data/repo/firebase_auth_repo_impl.dart';
 import '../../features/auth/domain/repo/auth_repo_abstract.dart';
@@ -10,10 +11,23 @@ import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
 final  getIt  = GetIt.instance;
 Future<void> initDependencies () async {
+
+  getIt.registerLazySingleton<Logger>(() => Logger(
+    printer: PrettyPrinter(
+      methodCount: 2,       // сколько вызовов из стека показать
+      errorMethodCount: 8,  // сколько вызовов стека при ошибке
+      lineLength: 120,      // длина разделительной линии
+      colors: true,         // цветные логи (в VS Code/Android Studio)
+      printEmojis: true,    // красивые иконки (🚀, ❌, ℹ️)
+    ),
+    // Фильтр: логируем только в режиме отладки (Debug)
+    filter: DevelopmentFilter(),
+  ));
+
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
   getIt.registerLazySingleton<FirebaseAuthRemoteDataSourceAbst>(
-        () => FirebaseAuthRemoteDataSourceImpl(getIt()),
+        () => FirebaseAuthRemoteDataSourceImpl(getIt(),getIt()),
   );
   getIt.registerLazySingleton<AuthRepo>(
         () => FirebaseAuthRepoImpl(getIt()),
@@ -21,7 +35,7 @@ Future<void> initDependencies () async {
   getIt.registerLazySingleton<AuthBloc>(
         () => AuthBloc(getIt<AuthRepo>()),
   );
-  getIt.registerFactory<AuthCubit>(
+  getIt.registerLazySingleton<AuthCubit>(
         () => AuthCubit(getIt<AuthRepo>()),
   );
 }

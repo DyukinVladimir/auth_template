@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../core/exceptions/auth_exceptions.dart';
 import '../../../../core/validators/auth_validator.dart';
 import '../bloc/auth_bloc.dart';
@@ -25,9 +24,8 @@ class _LoginPageState extends State<LoginPage> {
   bool _passwordHidden = true;
   bool _confirmPasswordHidden = true;
   bool _showErrors = false;
-  bool _isSubmitting = false;
 
-  AuthType _authType = AuthType.register;
+  AuthType _authType = AuthType.login;
 
   String? _emailError;
   String? _passwordError;
@@ -47,74 +45,39 @@ class _LoginPageState extends State<LoginPage> {
       _showErrors = false;
       _emailError = null;
       _passwordError = null;
+      _emailController.clear();
       _passwordController.clear();
       _confirmPasswordController.clear();
     });
   }
 
-  void _onFieldChanged() {
-    if (_emailError != null || _passwordError != null) {
-      setState(() {
-        _emailError = null;
-        _passwordError = null;
-      });
-    }
-  }
-
   void _submit() {
-    if (_isSubmitting) return;
-
     FocusManager.instance.primaryFocus?.unfocus();
     setState(() => _showErrors = true);
 
     if (!_formKey.currentState!.validate()) return;
 
-    if (_authType == AuthType.register &&
-        _passwordController.text != _confirmPasswordController.text) {
-      setState(() => _passwordError = "Пароли не совпадают");
-      return;
-    }
-    setState(() {
-      _emailError = null;
-      _passwordError = null;
-    });
-
     if (_authType == AuthType.login) {
       context.read<AuthBloc>().add(AuthBlocEvent.signInWithEmail(
         _emailController.text.trim(),
         _passwordController.text,
       ));
     } else {
+      // Просто передаем всё в Блок
       context.read<AuthBloc>().add(AuthBlocEvent.signUpWithEmail(
-        _emailController.text.trim(),
-        _passwordController.text,
-      ));
-    }
-
-    setState(() {
-      _isSubmitting = true;
-      _emailError = null;
-      _passwordError = null;
-    });
-    if (_authType == AuthType.login) {
-      context.read<AuthBloc>().add(AuthBlocEvent.signInWithEmail(
-        _emailController.text.trim(),
-        _passwordController.text,
-      ));
-    } else {
-      context.read<AuthBloc>().add(AuthBlocEvent.signUpWithEmail(
-        _emailController.text.trim(),
-        _passwordController.text,
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+        confirmPassword: _confirmPasswordController.text,
       ));
     }
   }
 
   void _handleFailure(AuthException ex) {
     setState(() {
-      _isSubmitting = false;
       switch (ex.type) {
         case AuthErrorType.invalidEmail:
         case AuthErrorType.userNotFound:
+        case AuthErrorType.emailAlreadyInUse:
           _emailError = ex.message;
           break;
         case AuthErrorType.wrongPassword:
@@ -122,29 +85,22 @@ class _LoginPageState extends State<LoginPage> {
           _passwordError = ex.message;
           break;
         default:
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(ex.message), backgroundColor: Colors.red),
-            );
-          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(ex.message), backgroundColor: Colors.red),
+          );
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    final authState = context.watch<AuthBloc>().state;
+    final isLoading = authState.maybeWhen(loading: () => true, orElse: () => false);
+
     return BlocListener<AuthBloc, AuthBlocState>(
       listener: (context, state) {
-        state.maybeWhen(
-          success: () {
-            setState(() => _isSubmitting = false);
-          },
-          failure: (ex) {
-            _handleFailure(ex);
-          },
-          loading: () {
-            setState(() => _isSubmitting = true);
-          },
-          orElse: () {},
+        state.whenOrNull(
+          failure: (ex) => _handleFailure(ex),
         );
       },
       child: Scaffold(
@@ -168,22 +124,26 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       AuthTextField(
                         controller: _emailController,
-                        validators: [AuthValidators.email],
+                        // Исправлено: явная передача val
+                        validators: [(val) => AuthValidators.email(val)],
                         label: 'Email',
                         keyboardType: TextInputType.emailAddress,
                         showErrors: _showErrors,
                         errorText: _emailError,
-                        onChanged: (_) => _onFieldChanged(),
+                        enabled: !isLoading,
+                        onChanged: (_) => setState(() => _emailError = null),
                       ),
                       const SizedBox(height: 16),
                       AuthTextField(
                         controller: _passwordController,
-                        validators: [AuthValidators.password],
+                        // Исправлено: явная передача val
+                        validators: [(val) => AuthValidators.password(val)],
                         label: 'Пароль',
                         showErrors: _showErrors,
                         errorText: _passwordError,
                         obscureText: _passwordHidden,
-                        onChanged: (_) => _onFieldChanged(),
+                        enabled: !isLoading,
+                        onChanged: (_) => setState(() => _passwordError = null),
                         child: IconButton(
                           icon: Icon(_passwordHidden
                               ? Icons.visibility_off_outlined
@@ -197,47 +157,47 @@ class _LoginPageState extends State<LoginPage> {
                         AuthTextField(
                           controller: _confirmPasswordController,
                           validators: [
-                            AuthValidators.confirmPassword(
-                                _passwordController.text)
+                            // Добавляем скобки () в конце, чтобы вызвать валидатор!
+                                (val) => AuthValidators.confirmPassword(_passwordController.text)(val),
                           ],
                           label: 'Подтвердите пароль',
                           showErrors: _showErrors,
                           obscureText: _confirmPasswordHidden,
-                          onChanged: (_) => _onFieldChanged(),
+                          enabled: !isLoading,
+                          onChanged: (_) => setState(() {}),
                           child: IconButton(
                             icon: Icon(_confirmPasswordHidden
                                 ? Icons.visibility_off_outlined
                                 : Icons.visibility_outlined),
-                            onPressed: () => setState(
-                                    () => _confirmPasswordHidden = !_confirmPasswordHidden),
+                            onPressed: () => setState(() => _confirmPasswordHidden = !_confirmPasswordHidden),
                           ),
                         ),
                       ],
                       const SizedBox(height: 24),
                       ElevatedButton(
-                        onPressed: _isSubmitting ? null : _submit,
+                        onPressed: isLoading ? null : _submit,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                         ),
-                        child: _isSubmitting
-                            ? const CircularProgressIndicator(color: Colors.white)
+                        child: isLoading
+                            ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, color: Colors.white),
+                        )
                             : Text(_authType == AuthType.login
                             ? 'Войти'
                             : 'Создать аккаунт'),
                       ),
                       const SizedBox(height: 16),
                       TextButton(
-                        onPressed: _toggleMode,
+                        onPressed: isLoading ? null : _toggleMode,
                         child: Text(_authType == AuthType.login
                             ? 'Еще нет аккаунта? Зарегистрируйтесь'
                             : 'Уже есть аккаунт? Войдите'),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            GoRouter.of(context).push('/phone'),
-                        child: const Text('По номеру телефона'),
                       ),
                     ],
                   ),

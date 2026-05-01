@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 enum AuthErrorType {
   invalidEmail,
+  emailAlreadyInUse, // Добавили
   userNotFound,
   weakPassword,
   wrongPassword,
+  requiresRecentLogin, // Добавили для удаления аккаунта
   network,
   unknown,
 }
@@ -19,20 +21,16 @@ class AuthException implements Exception {
     switch (e.code) {
       case 'email-already-in-use':
         return const AuthException(
-          'Email уже зарегистрирован',
-          type: AuthErrorType.weakPassword,
+          'Этот email уже занят',
+          type: AuthErrorType.emailAlreadyInUse, // Исправили тип
         );
       case 'invalid-email':
         return const AuthException(
           'Некорректный email',
           type: AuthErrorType.invalidEmail,
         );
-      case 'weak-password':
-        return const AuthException(
-          'Слишком слабый пароль',
-          type: AuthErrorType.weakPassword,
-        );
       case 'user-not-found':
+      case 'user-not-verified': // Можно объединить для безопасности
         return const AuthException(
           'Пользователь не найден',
           type: AuthErrorType.userNotFound,
@@ -42,21 +40,17 @@ class AuthException implements Exception {
           'Неверный пароль',
           type: AuthErrorType.wrongPassword,
         );
-      case 'network-request-failed':
+      case 'requires-recent-login':
         return const AuthException(
-          'Нет подключения к интернету',
-          type: AuthErrorType.network,
+          'Нужно перезайти в приложение для выполнения этого действия',
+          type: AuthErrorType.requiresRecentLogin,
         );
+    // ... остальные без изменений
       default:
-        return const AuthException(
-          'Ошибка авторизации',
+        return AuthException(
+          'Ошибка: ${e.message}', // Прокидываем оригинальное сообщение для дебага
           type: AuthErrorType.unknown,
         );
     }
   }
-
-  factory AuthException.unknown() => const AuthException(
-    'Что-то пошло не так',
-    type: AuthErrorType.unknown,
-  );
 }

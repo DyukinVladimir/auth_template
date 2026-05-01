@@ -11,15 +11,22 @@ class AuthCubit extends Cubit<AuthCubitState> {
   late final StreamSubscription _sub;
 
   AuthCubit(this._repo) : super(const AuthCubitState.initial()) {
-    _sub = _repo.authStateChanges().listen((user) {
-      if (user == null) {
+    _sub = _repo.authStateChanges().listen(
+          (user) {
+        if (user == null) {
+          emit(const AuthCubitState.unauthenticated());
+        } else {
+          emit(AuthCubitState.authenticated(user));
+        }
+      },
+      onError: (error) {
+        // Если случилась ошибка в стриме, не даем приложению зависнуть
+        // Просто логируем или уводим в unauthenticated
         emit(const AuthCubitState.unauthenticated());
-      } else {
-        emit(AuthCubitState.authenticated(user));
-      }
-    });
+      },
+      cancelOnError: false, // КРИТИЧНО: стрим не должен закрываться при ошибке
+    );
   }
-
 
   @override
   Future<void> close() {

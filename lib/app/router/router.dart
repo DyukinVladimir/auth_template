@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:auth_template/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:auth_template/features/auth/presentation/pages/home_page.dart';
 import 'package:auth_template/features/auth/presentation/pages/login.dart';
-import 'package:auth_template/features/auth/presentation/pages/phone_page.dart';
 import 'package:auth_template/features/auth/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +23,7 @@ class GoRouterRefreshStream extends ChangeNotifier {
 
 GoRouter createRouter(AuthCubit authCubit) {
   return GoRouter(
-    initialLocation: '/splash',
+    initialLocation: '/profile', // Меняем стартовую локацию
 
     refreshListenable: GoRouterRefreshStream(authCubit.stream),
 
@@ -34,9 +31,7 @@ GoRouter createRouter(AuthCubit authCubit) {
       final authState = authCubit.state;
 
       final isSplash = state.matchedLocation == '/splash';
-      final isAuthPage =
-          state.matchedLocation == '/login' ||
-              state.matchedLocation == '/phone';
+      final isAuthPage = state.matchedLocation == '/login';
 
       return authState.when(
         initial: () => isSplash ? null : '/splash',
@@ -47,9 +42,9 @@ GoRouter createRouter(AuthCubit authCubit) {
         },
 
         authenticated: (_) {
-          final bool isOnMapTab = state.matchedLocation.startsWith('/home');
-          if (!isOnMapTab) {
-            return '/home';
+          // Если авторизован и пытается зайти на splash или login — кидаем в профиль
+          if (isSplash || isAuthPage) {
+            return '/profile';
           }
           return null;
         },
@@ -64,23 +59,12 @@ GoRouter createRouter(AuthCubit authCubit) {
       ),
       GoRoute(
         path: '/login',
-        builder: (context, state) =>
-        LoginPage()
+        builder: (context, state) => const LoginPage(),
       ),
+      // Теперь профиль — это корневой экран после входа
       GoRoute(
-        path: '/phone',
-        builder: (context, state) =>
-        PhonePage()
-      ),
-      GoRoute(
-        path: '/home/profile',
-        builder: (context, state) =>
-        ProfilePage()
-      ),
-      GoRoute(
-        path: '/home',
-        builder: (context, state) =>
-        HomePage()
+        path: '/profile',
+        builder: (context, state) => const ProfilePage(),
       ),
     ],
   );

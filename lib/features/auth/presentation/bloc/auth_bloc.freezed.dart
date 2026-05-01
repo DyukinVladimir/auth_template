@@ -20,45 +20,39 @@ mixin _$AuthBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInWithEmail,
-    required TResult Function(String email, String password) signUpWithEmail,
-    required TResult Function() signOut,
     required TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
+      String email,
+      String password,
+      String confirmPassword,
     )
-    sendPhoneCode,
-    required TResult Function(String verificationId, String smsCode)
-    verifySmsCode,
+    signUpWithEmail,
+    required TResult Function() signOut,
+    required TResult Function(String password) deleteAccount,
+    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInWithEmail,
-    TResult? Function(String email, String password)? signUpWithEmail,
+    TResult? Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult? Function()? signOut,
-    TResult? Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult? Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult? Function(String password)? deleteAccount,
+    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInWithEmail,
-    TResult Function(String email, String password)? signUpWithEmail,
+    TResult Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult Function()? signOut,
-    TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult Function(String password)? deleteAccount,
+    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -67,8 +61,11 @@ mixin _$AuthBlocEvent {
     required TResult Function(_SignInWithEmail value) signInWithEmail,
     required TResult Function(_SignUpWithEmail value) signUpWithEmail,
     required TResult Function(_SignOut value) signOut,
-    required TResult Function(_SendPhoneCode value) sendPhoneCode,
-    required TResult Function(_VerifySmsCode value) verifySmsCode,
+    required TResult Function(_DeleteAccount value) deleteAccount,
+    required TResult Function(_SendPasswordResetEmail value)
+    sendPasswordResetEmail,
+    required TResult Function(_SendEmailVerification value)
+    sendEmailVerification,
     required TResult Function(_UpdateProfile value) updateProfile,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,8 +73,9 @@ mixin _$AuthBlocEvent {
     TResult? Function(_SignInWithEmail value)? signInWithEmail,
     TResult? Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(_SignOut value)? signOut,
-    TResult? Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult? Function(_VerifySmsCode value)? verifySmsCode,
+    TResult? Function(_DeleteAccount value)? deleteAccount,
+    TResult? Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult? Function(_SendEmailVerification value)? sendEmailVerification,
     TResult? Function(_UpdateProfile value)? updateProfile,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,8 +83,9 @@ mixin _$AuthBlocEvent {
     TResult Function(_SignInWithEmail value)? signInWithEmail,
     TResult Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult Function(_SignOut value)? signOut,
-    TResult Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult Function(_VerifySmsCode value)? verifySmsCode,
+    TResult Function(_DeleteAccount value)? deleteAccount,
+    TResult Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult Function(_SendEmailVerification value)? sendEmailVerification,
     TResult Function(_UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -196,16 +195,16 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInWithEmail,
-    required TResult Function(String email, String password) signUpWithEmail,
-    required TResult Function() signOut,
     required TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
+      String email,
+      String password,
+      String confirmPassword,
     )
-    sendPhoneCode,
-    required TResult Function(String verificationId, String smsCode)
-    verifySmsCode,
+    signUpWithEmail,
+    required TResult Function() signOut,
+    required TResult Function(String password) deleteAccount,
+    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
   }) {
@@ -216,15 +215,12 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInWithEmail,
-    TResult? Function(String email, String password)? signUpWithEmail,
+    TResult? Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult? Function()? signOut,
-    TResult? Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult? Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult? Function(String password)? deleteAccount,
+    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
     return signInWithEmail?.call(email, password);
@@ -234,15 +230,12 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInWithEmail,
-    TResult Function(String email, String password)? signUpWithEmail,
+    TResult Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult Function()? signOut,
-    TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult Function(String password)? deleteAccount,
+    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
   }) {
@@ -258,8 +251,11 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
     required TResult Function(_SignInWithEmail value) signInWithEmail,
     required TResult Function(_SignUpWithEmail value) signUpWithEmail,
     required TResult Function(_SignOut value) signOut,
-    required TResult Function(_SendPhoneCode value) sendPhoneCode,
-    required TResult Function(_VerifySmsCode value) verifySmsCode,
+    required TResult Function(_DeleteAccount value) deleteAccount,
+    required TResult Function(_SendPasswordResetEmail value)
+    sendPasswordResetEmail,
+    required TResult Function(_SendEmailVerification value)
+    sendEmailVerification,
     required TResult Function(_UpdateProfile value) updateProfile,
   }) {
     return signInWithEmail(this);
@@ -271,8 +267,9 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
     TResult? Function(_SignInWithEmail value)? signInWithEmail,
     TResult? Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(_SignOut value)? signOut,
-    TResult? Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult? Function(_VerifySmsCode value)? verifySmsCode,
+    TResult? Function(_DeleteAccount value)? deleteAccount,
+    TResult? Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult? Function(_SendEmailVerification value)? sendEmailVerification,
     TResult? Function(_UpdateProfile value)? updateProfile,
   }) {
     return signInWithEmail?.call(this);
@@ -284,8 +281,9 @@ class _$SignInWithEmailImpl implements _SignInWithEmail {
     TResult Function(_SignInWithEmail value)? signInWithEmail,
     TResult Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult Function(_SignOut value)? signOut,
-    TResult Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult Function(_VerifySmsCode value)? verifySmsCode,
+    TResult Function(_DeleteAccount value)? deleteAccount,
+    TResult Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult Function(_SendEmailVerification value)? sendEmailVerification,
     TResult Function(_UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {
@@ -317,7 +315,7 @@ abstract class _$$SignUpWithEmailImplCopyWith<$Res> {
     $Res Function(_$SignUpWithEmailImpl) then,
   ) = __$$SignUpWithEmailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String password});
+  $Res call({String email, String password, String confirmPassword});
 }
 
 /// @nodoc
@@ -333,16 +331,24 @@ class __$$SignUpWithEmailImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? email = null, Object? password = null}) {
+  $Res call({
+    Object? email = null,
+    Object? password = null,
+    Object? confirmPassword = null,
+  }) {
     return _then(
       _$SignUpWithEmailImpl(
-        null == email
+        email: null == email
             ? _value.email
             : email // ignore: cast_nullable_to_non_nullable
                   as String,
-        null == password
+        password: null == password
             ? _value.password
             : password // ignore: cast_nullable_to_non_nullable
+                  as String,
+        confirmPassword: null == confirmPassword
+            ? _value.confirmPassword
+            : confirmPassword // ignore: cast_nullable_to_non_nullable
                   as String,
       ),
     );
@@ -352,16 +358,22 @@ class __$$SignUpWithEmailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignUpWithEmailImpl implements _SignUpWithEmail {
-  const _$SignUpWithEmailImpl(this.email, this.password);
+  const _$SignUpWithEmailImpl({
+    required this.email,
+    required this.password,
+    required this.confirmPassword,
+  });
 
   @override
   final String email;
   @override
   final String password;
+  @override
+  final String confirmPassword;
 
   @override
   String toString() {
-    return 'AuthBlocEvent.signUpWithEmail(email: $email, password: $password)';
+    return 'AuthBlocEvent.signUpWithEmail(email: $email, password: $password, confirmPassword: $confirmPassword)';
   }
 
   @override
@@ -371,11 +383,14 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
             other is _$SignUpWithEmailImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode =>
+      Object.hash(runtimeType, email, password, confirmPassword);
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -392,58 +407,52 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInWithEmail,
-    required TResult Function(String email, String password) signUpWithEmail,
-    required TResult Function() signOut,
     required TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
+      String email,
+      String password,
+      String confirmPassword,
     )
-    sendPhoneCode,
-    required TResult Function(String verificationId, String smsCode)
-    verifySmsCode,
+    signUpWithEmail,
+    required TResult Function() signOut,
+    required TResult Function(String password) deleteAccount,
+    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
   }) {
-    return signUpWithEmail(email, password);
+    return signUpWithEmail(email, password, confirmPassword);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInWithEmail,
-    TResult? Function(String email, String password)? signUpWithEmail,
+    TResult? Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult? Function()? signOut,
-    TResult? Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult? Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult? Function(String password)? deleteAccount,
+    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
-    return signUpWithEmail?.call(email, password);
+    return signUpWithEmail?.call(email, password, confirmPassword);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInWithEmail,
-    TResult Function(String email, String password)? signUpWithEmail,
+    TResult Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult Function()? signOut,
-    TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult Function(String password)? deleteAccount,
+    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
   }) {
     if (signUpWithEmail != null) {
-      return signUpWithEmail(email, password);
+      return signUpWithEmail(email, password, confirmPassword);
     }
     return orElse();
   }
@@ -454,8 +463,11 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
     required TResult Function(_SignInWithEmail value) signInWithEmail,
     required TResult Function(_SignUpWithEmail value) signUpWithEmail,
     required TResult Function(_SignOut value) signOut,
-    required TResult Function(_SendPhoneCode value) sendPhoneCode,
-    required TResult Function(_VerifySmsCode value) verifySmsCode,
+    required TResult Function(_DeleteAccount value) deleteAccount,
+    required TResult Function(_SendPasswordResetEmail value)
+    sendPasswordResetEmail,
+    required TResult Function(_SendEmailVerification value)
+    sendEmailVerification,
     required TResult Function(_UpdateProfile value) updateProfile,
   }) {
     return signUpWithEmail(this);
@@ -467,8 +479,9 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
     TResult? Function(_SignInWithEmail value)? signInWithEmail,
     TResult? Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(_SignOut value)? signOut,
-    TResult? Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult? Function(_VerifySmsCode value)? verifySmsCode,
+    TResult? Function(_DeleteAccount value)? deleteAccount,
+    TResult? Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult? Function(_SendEmailVerification value)? sendEmailVerification,
     TResult? Function(_UpdateProfile value)? updateProfile,
   }) {
     return signUpWithEmail?.call(this);
@@ -480,8 +493,9 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
     TResult Function(_SignInWithEmail value)? signInWithEmail,
     TResult Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult Function(_SignOut value)? signOut,
-    TResult Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult Function(_VerifySmsCode value)? verifySmsCode,
+    TResult Function(_DeleteAccount value)? deleteAccount,
+    TResult Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult Function(_SendEmailVerification value)? sendEmailVerification,
     TResult Function(_UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {
@@ -493,11 +507,15 @@ class _$SignUpWithEmailImpl implements _SignUpWithEmail {
 }
 
 abstract class _SignUpWithEmail implements AuthBlocEvent {
-  const factory _SignUpWithEmail(final String email, final String password) =
-      _$SignUpWithEmailImpl;
+  const factory _SignUpWithEmail({
+    required final String email,
+    required final String password,
+    required final String confirmPassword,
+  }) = _$SignUpWithEmailImpl;
 
   String get email;
   String get password;
+  String get confirmPassword;
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -550,16 +568,16 @@ class _$SignOutImpl implements _SignOut {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInWithEmail,
-    required TResult Function(String email, String password) signUpWithEmail,
-    required TResult Function() signOut,
     required TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
+      String email,
+      String password,
+      String confirmPassword,
     )
-    sendPhoneCode,
-    required TResult Function(String verificationId, String smsCode)
-    verifySmsCode,
+    signUpWithEmail,
+    required TResult Function() signOut,
+    required TResult Function(String password) deleteAccount,
+    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
   }) {
@@ -570,15 +588,12 @@ class _$SignOutImpl implements _SignOut {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInWithEmail,
-    TResult? Function(String email, String password)? signUpWithEmail,
+    TResult? Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult? Function()? signOut,
-    TResult? Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult? Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult? Function(String password)? deleteAccount,
+    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
     return signOut?.call();
@@ -588,15 +603,12 @@ class _$SignOutImpl implements _SignOut {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInWithEmail,
-    TResult Function(String email, String password)? signUpWithEmail,
+    TResult Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult Function()? signOut,
-    TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult Function(String password)? deleteAccount,
+    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
   }) {
@@ -612,8 +624,11 @@ class _$SignOutImpl implements _SignOut {
     required TResult Function(_SignInWithEmail value) signInWithEmail,
     required TResult Function(_SignUpWithEmail value) signUpWithEmail,
     required TResult Function(_SignOut value) signOut,
-    required TResult Function(_SendPhoneCode value) sendPhoneCode,
-    required TResult Function(_VerifySmsCode value) verifySmsCode,
+    required TResult Function(_DeleteAccount value) deleteAccount,
+    required TResult Function(_SendPasswordResetEmail value)
+    sendPasswordResetEmail,
+    required TResult Function(_SendEmailVerification value)
+    sendEmailVerification,
     required TResult Function(_UpdateProfile value) updateProfile,
   }) {
     return signOut(this);
@@ -625,8 +640,9 @@ class _$SignOutImpl implements _SignOut {
     TResult? Function(_SignInWithEmail value)? signInWithEmail,
     TResult? Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(_SignOut value)? signOut,
-    TResult? Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult? Function(_VerifySmsCode value)? verifySmsCode,
+    TResult? Function(_DeleteAccount value)? deleteAccount,
+    TResult? Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult? Function(_SendEmailVerification value)? sendEmailVerification,
     TResult? Function(_UpdateProfile value)? updateProfile,
   }) {
     return signOut?.call(this);
@@ -638,8 +654,9 @@ class _$SignOutImpl implements _SignOut {
     TResult Function(_SignInWithEmail value)? signInWithEmail,
     TResult Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult Function(_SignOut value)? signOut,
-    TResult Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult Function(_VerifySmsCode value)? verifySmsCode,
+    TResult Function(_DeleteAccount value)? deleteAccount,
+    TResult Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult Function(_SendEmailVerification value)? sendEmailVerification,
     TResult Function(_UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {
@@ -655,51 +672,35 @@ abstract class _SignOut implements AuthBlocEvent {
 }
 
 /// @nodoc
-abstract class _$$SendPhoneCodeImplCopyWith<$Res> {
-  factory _$$SendPhoneCodeImplCopyWith(
-    _$SendPhoneCodeImpl value,
-    $Res Function(_$SendPhoneCodeImpl) then,
-  ) = __$$SendPhoneCodeImplCopyWithImpl<$Res>;
+abstract class _$$DeleteAccountImplCopyWith<$Res> {
+  factory _$$DeleteAccountImplCopyWith(
+    _$DeleteAccountImpl value,
+    $Res Function(_$DeleteAccountImpl) then,
+  ) = __$$DeleteAccountImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({
-    String phoneNumber,
-    void Function(String) codeSent,
-    void Function(AuthException) onError,
-  });
+  $Res call({String password});
 }
 
 /// @nodoc
-class __$$SendPhoneCodeImplCopyWithImpl<$Res>
-    extends _$AuthBlocEventCopyWithImpl<$Res, _$SendPhoneCodeImpl>
-    implements _$$SendPhoneCodeImplCopyWith<$Res> {
-  __$$SendPhoneCodeImplCopyWithImpl(
-    _$SendPhoneCodeImpl _value,
-    $Res Function(_$SendPhoneCodeImpl) _then,
+class __$$DeleteAccountImplCopyWithImpl<$Res>
+    extends _$AuthBlocEventCopyWithImpl<$Res, _$DeleteAccountImpl>
+    implements _$$DeleteAccountImplCopyWith<$Res> {
+  __$$DeleteAccountImplCopyWithImpl(
+    _$DeleteAccountImpl _value,
+    $Res Function(_$DeleteAccountImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? phoneNumber = null,
-    Object? codeSent = null,
-    Object? onError = null,
-  }) {
+  $Res call({Object? password = null}) {
     return _then(
-      _$SendPhoneCodeImpl(
-        phoneNumber: null == phoneNumber
-            ? _value.phoneNumber
-            : phoneNumber // ignore: cast_nullable_to_non_nullable
+      _$DeleteAccountImpl(
+        password: null == password
+            ? _value.password
+            : password // ignore: cast_nullable_to_non_nullable
                   as String,
-        codeSent: null == codeSent
-            ? _value.codeSent
-            : codeSent // ignore: cast_nullable_to_non_nullable
-                  as void Function(String),
-        onError: null == onError
-            ? _value.onError
-            : onError // ignore: cast_nullable_to_non_nullable
-                  as void Function(AuthException),
       ),
     );
   }
@@ -707,104 +708,87 @@ class __$$SendPhoneCodeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SendPhoneCodeImpl implements _SendPhoneCode {
-  const _$SendPhoneCodeImpl({
-    required this.phoneNumber,
-    required this.codeSent,
-    required this.onError,
-  });
+class _$DeleteAccountImpl implements _DeleteAccount {
+  const _$DeleteAccountImpl({required this.password});
 
   @override
-  final String phoneNumber;
-  @override
-  final void Function(String) codeSent;
-  @override
-  final void Function(AuthException) onError;
+  final String password;
 
   @override
   String toString() {
-    return 'AuthBlocEvent.sendPhoneCode(phoneNumber: $phoneNumber, codeSent: $codeSent, onError: $onError)';
+    return 'AuthBlocEvent.deleteAccount(password: $password)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SendPhoneCodeImpl &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.codeSent, codeSent) ||
-                other.codeSent == codeSent) &&
-            (identical(other.onError, onError) || other.onError == onError));
+            other is _$DeleteAccountImpl &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, phoneNumber, codeSent, onError);
+  int get hashCode => Object.hash(runtimeType, password);
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SendPhoneCodeImplCopyWith<_$SendPhoneCodeImpl> get copyWith =>
-      __$$SendPhoneCodeImplCopyWithImpl<_$SendPhoneCodeImpl>(this, _$identity);
+  _$$DeleteAccountImplCopyWith<_$DeleteAccountImpl> get copyWith =>
+      __$$DeleteAccountImplCopyWithImpl<_$DeleteAccountImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInWithEmail,
-    required TResult Function(String email, String password) signUpWithEmail,
-    required TResult Function() signOut,
     required TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
+      String email,
+      String password,
+      String confirmPassword,
     )
-    sendPhoneCode,
-    required TResult Function(String verificationId, String smsCode)
-    verifySmsCode,
+    signUpWithEmail,
+    required TResult Function() signOut,
+    required TResult Function(String password) deleteAccount,
+    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
   }) {
-    return sendPhoneCode(phoneNumber, codeSent, onError);
+    return deleteAccount(password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInWithEmail,
-    TResult? Function(String email, String password)? signUpWithEmail,
+    TResult? Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult? Function()? signOut,
-    TResult? Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult? Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult? Function(String password)? deleteAccount,
+    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
-    return sendPhoneCode?.call(phoneNumber, codeSent, onError);
+    return deleteAccount?.call(password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInWithEmail,
-    TResult Function(String email, String password)? signUpWithEmail,
+    TResult Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult Function()? signOut,
-    TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult Function(String password)? deleteAccount,
+    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
   }) {
-    if (sendPhoneCode != null) {
-      return sendPhoneCode(phoneNumber, codeSent, onError);
+    if (deleteAccount != null) {
+      return deleteAccount(password);
     }
     return orElse();
   }
@@ -815,11 +799,14 @@ class _$SendPhoneCodeImpl implements _SendPhoneCode {
     required TResult Function(_SignInWithEmail value) signInWithEmail,
     required TResult Function(_SignUpWithEmail value) signUpWithEmail,
     required TResult Function(_SignOut value) signOut,
-    required TResult Function(_SendPhoneCode value) sendPhoneCode,
-    required TResult Function(_VerifySmsCode value) verifySmsCode,
+    required TResult Function(_DeleteAccount value) deleteAccount,
+    required TResult Function(_SendPasswordResetEmail value)
+    sendPasswordResetEmail,
+    required TResult Function(_SendEmailVerification value)
+    sendEmailVerification,
     required TResult Function(_UpdateProfile value) updateProfile,
   }) {
-    return sendPhoneCode(this);
+    return deleteAccount(this);
   }
 
   @override
@@ -828,11 +815,12 @@ class _$SendPhoneCodeImpl implements _SendPhoneCode {
     TResult? Function(_SignInWithEmail value)? signInWithEmail,
     TResult? Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(_SignOut value)? signOut,
-    TResult? Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult? Function(_VerifySmsCode value)? verifySmsCode,
+    TResult? Function(_DeleteAccount value)? deleteAccount,
+    TResult? Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult? Function(_SendEmailVerification value)? sendEmailVerification,
     TResult? Function(_UpdateProfile value)? updateProfile,
   }) {
-    return sendPhoneCode?.call(this);
+    return deleteAccount?.call(this);
   }
 
   @override
@@ -841,69 +829,61 @@ class _$SendPhoneCodeImpl implements _SendPhoneCode {
     TResult Function(_SignInWithEmail value)? signInWithEmail,
     TResult Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult Function(_SignOut value)? signOut,
-    TResult Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult Function(_VerifySmsCode value)? verifySmsCode,
+    TResult Function(_DeleteAccount value)? deleteAccount,
+    TResult Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult Function(_SendEmailVerification value)? sendEmailVerification,
     TResult Function(_UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {
-    if (sendPhoneCode != null) {
-      return sendPhoneCode(this);
+    if (deleteAccount != null) {
+      return deleteAccount(this);
     }
     return orElse();
   }
 }
 
-abstract class _SendPhoneCode implements AuthBlocEvent {
-  const factory _SendPhoneCode({
-    required final String phoneNumber,
-    required final void Function(String) codeSent,
-    required final void Function(AuthException) onError,
-  }) = _$SendPhoneCodeImpl;
+abstract class _DeleteAccount implements AuthBlocEvent {
+  const factory _DeleteAccount({required final String password}) =
+      _$DeleteAccountImpl;
 
-  String get phoneNumber;
-  void Function(String) get codeSent;
-  void Function(AuthException) get onError;
+  String get password;
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SendPhoneCodeImplCopyWith<_$SendPhoneCodeImpl> get copyWith =>
+  _$$DeleteAccountImplCopyWith<_$DeleteAccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$VerifySmsCodeImplCopyWith<$Res> {
-  factory _$$VerifySmsCodeImplCopyWith(
-    _$VerifySmsCodeImpl value,
-    $Res Function(_$VerifySmsCodeImpl) then,
-  ) = __$$VerifySmsCodeImplCopyWithImpl<$Res>;
+abstract class _$$SendPasswordResetEmailImplCopyWith<$Res> {
+  factory _$$SendPasswordResetEmailImplCopyWith(
+    _$SendPasswordResetEmailImpl value,
+    $Res Function(_$SendPasswordResetEmailImpl) then,
+  ) = __$$SendPasswordResetEmailImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String verificationId, String smsCode});
+  $Res call({String email});
 }
 
 /// @nodoc
-class __$$VerifySmsCodeImplCopyWithImpl<$Res>
-    extends _$AuthBlocEventCopyWithImpl<$Res, _$VerifySmsCodeImpl>
-    implements _$$VerifySmsCodeImplCopyWith<$Res> {
-  __$$VerifySmsCodeImplCopyWithImpl(
-    _$VerifySmsCodeImpl _value,
-    $Res Function(_$VerifySmsCodeImpl) _then,
+class __$$SendPasswordResetEmailImplCopyWithImpl<$Res>
+    extends _$AuthBlocEventCopyWithImpl<$Res, _$SendPasswordResetEmailImpl>
+    implements _$$SendPasswordResetEmailImplCopyWith<$Res> {
+  __$$SendPasswordResetEmailImplCopyWithImpl(
+    _$SendPasswordResetEmailImpl _value,
+    $Res Function(_$SendPasswordResetEmailImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? verificationId = null, Object? smsCode = null}) {
+  $Res call({Object? email = null}) {
     return _then(
-      _$VerifySmsCodeImpl(
-        verificationId: null == verificationId
-            ? _value.verificationId
-            : verificationId // ignore: cast_nullable_to_non_nullable
-                  as String,
-        smsCode: null == smsCode
-            ? _value.smsCode
-            : smsCode // ignore: cast_nullable_to_non_nullable
+      _$SendPasswordResetEmailImpl(
+        null == email
+            ? _value.email
+            : email // ignore: cast_nullable_to_non_nullable
                   as String,
       ),
     );
@@ -912,99 +892,90 @@ class __$$VerifySmsCodeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$VerifySmsCodeImpl implements _VerifySmsCode {
-  const _$VerifySmsCodeImpl({
-    required this.verificationId,
-    required this.smsCode,
-  });
+class _$SendPasswordResetEmailImpl implements _SendPasswordResetEmail {
+  const _$SendPasswordResetEmailImpl(this.email);
 
   @override
-  final String verificationId;
-  @override
-  final String smsCode;
+  final String email;
 
   @override
   String toString() {
-    return 'AuthBlocEvent.verifySmsCode(verificationId: $verificationId, smsCode: $smsCode)';
+    return 'AuthBlocEvent.sendPasswordResetEmail(email: $email)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VerifySmsCodeImpl &&
-            (identical(other.verificationId, verificationId) ||
-                other.verificationId == verificationId) &&
-            (identical(other.smsCode, smsCode) || other.smsCode == smsCode));
+            other is _$SendPasswordResetEmailImpl &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, verificationId, smsCode);
+  int get hashCode => Object.hash(runtimeType, email);
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$VerifySmsCodeImplCopyWith<_$VerifySmsCodeImpl> get copyWith =>
-      __$$VerifySmsCodeImplCopyWithImpl<_$VerifySmsCodeImpl>(this, _$identity);
+  _$$SendPasswordResetEmailImplCopyWith<_$SendPasswordResetEmailImpl>
+  get copyWith =>
+      __$$SendPasswordResetEmailImplCopyWithImpl<_$SendPasswordResetEmailImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInWithEmail,
-    required TResult Function(String email, String password) signUpWithEmail,
-    required TResult Function() signOut,
     required TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
+      String email,
+      String password,
+      String confirmPassword,
     )
-    sendPhoneCode,
-    required TResult Function(String verificationId, String smsCode)
-    verifySmsCode,
+    signUpWithEmail,
+    required TResult Function() signOut,
+    required TResult Function(String password) deleteAccount,
+    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
   }) {
-    return verifySmsCode(verificationId, smsCode);
+    return sendPasswordResetEmail(email);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInWithEmail,
-    TResult? Function(String email, String password)? signUpWithEmail,
+    TResult? Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult? Function()? signOut,
-    TResult? Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult? Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult? Function(String password)? deleteAccount,
+    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
-    return verifySmsCode?.call(verificationId, smsCode);
+    return sendPasswordResetEmail?.call(email);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInWithEmail,
-    TResult Function(String email, String password)? signUpWithEmail,
+    TResult Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult Function()? signOut,
-    TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult Function(String password)? deleteAccount,
+    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
   }) {
-    if (verifySmsCode != null) {
-      return verifySmsCode(verificationId, smsCode);
+    if (sendPasswordResetEmail != null) {
+      return sendPasswordResetEmail(email);
     }
     return orElse();
   }
@@ -1015,11 +986,14 @@ class _$VerifySmsCodeImpl implements _VerifySmsCode {
     required TResult Function(_SignInWithEmail value) signInWithEmail,
     required TResult Function(_SignUpWithEmail value) signUpWithEmail,
     required TResult Function(_SignOut value) signOut,
-    required TResult Function(_SendPhoneCode value) sendPhoneCode,
-    required TResult Function(_VerifySmsCode value) verifySmsCode,
+    required TResult Function(_DeleteAccount value) deleteAccount,
+    required TResult Function(_SendPasswordResetEmail value)
+    sendPasswordResetEmail,
+    required TResult Function(_SendEmailVerification value)
+    sendEmailVerification,
     required TResult Function(_UpdateProfile value) updateProfile,
   }) {
-    return verifySmsCode(this);
+    return sendPasswordResetEmail(this);
   }
 
   @override
@@ -1028,11 +1002,12 @@ class _$VerifySmsCodeImpl implements _VerifySmsCode {
     TResult? Function(_SignInWithEmail value)? signInWithEmail,
     TResult? Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(_SignOut value)? signOut,
-    TResult? Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult? Function(_VerifySmsCode value)? verifySmsCode,
+    TResult? Function(_DeleteAccount value)? deleteAccount,
+    TResult? Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult? Function(_SendEmailVerification value)? sendEmailVerification,
     TResult? Function(_UpdateProfile value)? updateProfile,
   }) {
-    return verifySmsCode?.call(this);
+    return sendPasswordResetEmail?.call(this);
   }
 
   @override
@@ -1041,32 +1016,178 @@ class _$VerifySmsCodeImpl implements _VerifySmsCode {
     TResult Function(_SignInWithEmail value)? signInWithEmail,
     TResult Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult Function(_SignOut value)? signOut,
-    TResult Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult Function(_VerifySmsCode value)? verifySmsCode,
+    TResult Function(_DeleteAccount value)? deleteAccount,
+    TResult Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult Function(_SendEmailVerification value)? sendEmailVerification,
     TResult Function(_UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {
-    if (verifySmsCode != null) {
-      return verifySmsCode(this);
+    if (sendPasswordResetEmail != null) {
+      return sendPasswordResetEmail(this);
     }
     return orElse();
   }
 }
 
-abstract class _VerifySmsCode implements AuthBlocEvent {
-  const factory _VerifySmsCode({
-    required final String verificationId,
-    required final String smsCode,
-  }) = _$VerifySmsCodeImpl;
+abstract class _SendPasswordResetEmail implements AuthBlocEvent {
+  const factory _SendPasswordResetEmail(final String email) =
+      _$SendPasswordResetEmailImpl;
 
-  String get verificationId;
-  String get smsCode;
+  String get email;
 
   /// Create a copy of AuthBlocEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$VerifySmsCodeImplCopyWith<_$VerifySmsCodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SendPasswordResetEmailImplCopyWith<_$SendPasswordResetEmailImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendEmailVerificationImplCopyWith<$Res> {
+  factory _$$SendEmailVerificationImplCopyWith(
+    _$SendEmailVerificationImpl value,
+    $Res Function(_$SendEmailVerificationImpl) then,
+  ) = __$$SendEmailVerificationImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendEmailVerificationImplCopyWithImpl<$Res>
+    extends _$AuthBlocEventCopyWithImpl<$Res, _$SendEmailVerificationImpl>
+    implements _$$SendEmailVerificationImplCopyWith<$Res> {
+  __$$SendEmailVerificationImplCopyWithImpl(
+    _$SendEmailVerificationImpl _value,
+    $Res Function(_$SendEmailVerificationImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of AuthBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SendEmailVerificationImpl implements _SendEmailVerification {
+  const _$SendEmailVerificationImpl();
+
+  @override
+  String toString() {
+    return 'AuthBlocEvent.sendEmailVerification()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendEmailVerificationImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) signInWithEmail,
+    required TResult Function(
+      String email,
+      String password,
+      String confirmPassword,
+    )
+    signUpWithEmail,
+    required TResult Function() signOut,
+    required TResult Function(String password) deleteAccount,
+    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function() sendEmailVerification,
+    required TResult Function(String? displayName, String? photoUrl)
+    updateProfile,
+  }) {
+    return sendEmailVerification();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? signInWithEmail,
+    TResult? Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
+    TResult? Function()? signOut,
+    TResult? Function(String password)? deleteAccount,
+    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function()? sendEmailVerification,
+    TResult? Function(String? displayName, String? photoUrl)? updateProfile,
+  }) {
+    return sendEmailVerification?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? signInWithEmail,
+    TResult Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
+    TResult Function()? signOut,
+    TResult Function(String password)? deleteAccount,
+    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function()? sendEmailVerification,
+    TResult Function(String? displayName, String? photoUrl)? updateProfile,
+    required TResult orElse(),
+  }) {
+    if (sendEmailVerification != null) {
+      return sendEmailVerification();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignInWithEmail value) signInWithEmail,
+    required TResult Function(_SignUpWithEmail value) signUpWithEmail,
+    required TResult Function(_SignOut value) signOut,
+    required TResult Function(_DeleteAccount value) deleteAccount,
+    required TResult Function(_SendPasswordResetEmail value)
+    sendPasswordResetEmail,
+    required TResult Function(_SendEmailVerification value)
+    sendEmailVerification,
+    required TResult Function(_UpdateProfile value) updateProfile,
+  }) {
+    return sendEmailVerification(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SignInWithEmail value)? signInWithEmail,
+    TResult? Function(_SignUpWithEmail value)? signUpWithEmail,
+    TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_DeleteAccount value)? deleteAccount,
+    TResult? Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult? Function(_SendEmailVerification value)? sendEmailVerification,
+    TResult? Function(_UpdateProfile value)? updateProfile,
+  }) {
+    return sendEmailVerification?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignInWithEmail value)? signInWithEmail,
+    TResult Function(_SignUpWithEmail value)? signUpWithEmail,
+    TResult Function(_SignOut value)? signOut,
+    TResult Function(_DeleteAccount value)? deleteAccount,
+    TResult Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult Function(_SendEmailVerification value)? sendEmailVerification,
+    TResult Function(_UpdateProfile value)? updateProfile,
+    required TResult orElse(),
+  }) {
+    if (sendEmailVerification != null) {
+      return sendEmailVerification(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SendEmailVerification implements AuthBlocEvent {
+  const factory _SendEmailVerification() = _$SendEmailVerificationImpl;
 }
 
 /// @nodoc
@@ -1149,16 +1270,16 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) signInWithEmail,
-    required TResult Function(String email, String password) signUpWithEmail,
-    required TResult Function() signOut,
     required TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
+      String email,
+      String password,
+      String confirmPassword,
     )
-    sendPhoneCode,
-    required TResult Function(String verificationId, String smsCode)
-    verifySmsCode,
+    signUpWithEmail,
+    required TResult Function() signOut,
+    required TResult Function(String password) deleteAccount,
+    required TResult Function(String email) sendPasswordResetEmail,
+    required TResult Function() sendEmailVerification,
     required TResult Function(String? displayName, String? photoUrl)
     updateProfile,
   }) {
@@ -1169,15 +1290,12 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? signInWithEmail,
-    TResult? Function(String email, String password)? signUpWithEmail,
+    TResult? Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult? Function()? signOut,
-    TResult? Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult? Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult? Function(String password)? deleteAccount,
+    TResult? Function(String email)? sendPasswordResetEmail,
+    TResult? Function()? sendEmailVerification,
     TResult? Function(String? displayName, String? photoUrl)? updateProfile,
   }) {
     return updateProfile?.call(displayName, photoUrl);
@@ -1187,15 +1305,12 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? signInWithEmail,
-    TResult Function(String email, String password)? signUpWithEmail,
+    TResult Function(String email, String password, String confirmPassword)?
+    signUpWithEmail,
     TResult Function()? signOut,
-    TResult Function(
-      String phoneNumber,
-      void Function(String) codeSent,
-      void Function(AuthException) onError,
-    )?
-    sendPhoneCode,
-    TResult Function(String verificationId, String smsCode)? verifySmsCode,
+    TResult Function(String password)? deleteAccount,
+    TResult Function(String email)? sendPasswordResetEmail,
+    TResult Function()? sendEmailVerification,
     TResult Function(String? displayName, String? photoUrl)? updateProfile,
     required TResult orElse(),
   }) {
@@ -1211,8 +1326,11 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult Function(_SignInWithEmail value) signInWithEmail,
     required TResult Function(_SignUpWithEmail value) signUpWithEmail,
     required TResult Function(_SignOut value) signOut,
-    required TResult Function(_SendPhoneCode value) sendPhoneCode,
-    required TResult Function(_VerifySmsCode value) verifySmsCode,
+    required TResult Function(_DeleteAccount value) deleteAccount,
+    required TResult Function(_SendPasswordResetEmail value)
+    sendPasswordResetEmail,
+    required TResult Function(_SendEmailVerification value)
+    sendEmailVerification,
     required TResult Function(_UpdateProfile value) updateProfile,
   }) {
     return updateProfile(this);
@@ -1224,8 +1342,9 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult? Function(_SignInWithEmail value)? signInWithEmail,
     TResult? Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(_SignOut value)? signOut,
-    TResult? Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult? Function(_VerifySmsCode value)? verifySmsCode,
+    TResult? Function(_DeleteAccount value)? deleteAccount,
+    TResult? Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult? Function(_SendEmailVerification value)? sendEmailVerification,
     TResult? Function(_UpdateProfile value)? updateProfile,
   }) {
     return updateProfile?.call(this);
@@ -1237,8 +1356,9 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult Function(_SignInWithEmail value)? signInWithEmail,
     TResult Function(_SignUpWithEmail value)? signUpWithEmail,
     TResult Function(_SignOut value)? signOut,
-    TResult Function(_SendPhoneCode value)? sendPhoneCode,
-    TResult Function(_VerifySmsCode value)? verifySmsCode,
+    TResult Function(_DeleteAccount value)? deleteAccount,
+    TResult Function(_SendPasswordResetEmail value)? sendPasswordResetEmail,
+    TResult Function(_SendEmailVerification value)? sendEmailVerification,
     TResult Function(_UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {

@@ -1,4 +1,3 @@
-import 'package:auth_template/core/exceptions/auth_exceptions.dart';
 import '../entity/user_entity.dart';
 
 abstract class AuthRepo {
@@ -22,21 +21,9 @@ abstract class AuthRepo {
 
   Future<void> signOut();
 
-  Future<void> deleteAccount();
+  Future<void> deleteAccount(String password);
 
   Future<void> reloadUser();
-
-  // Phone auth
-  Future<void> sendPhoneCode(
-      String phoneNumber, {
-        required void Function(String verificationId) codeSent,
-        required void Function(AuthException e) onError,
-      });
-
-  Future<UserEntity> verifySmsCode({
-    required String verificationId,
-    required String smsCode,
-  });
 
   Future<UserEntity> updateProfile({
     String? displayName,

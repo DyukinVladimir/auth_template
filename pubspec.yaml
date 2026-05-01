@@ -26,6 +26,8 @@ dependencies:
   firebase_auth: ^6.3.0
   get_it: ^9.2.1
   cloud_firestore: ^6.2.0
+  bloc_concurrency: ^0.3.0
+  logger: ^2.7.0
 
 dev_dependencies:
 

@@ -1,22 +1,37 @@
 part of 'auth_bloc.dart';
 
-
 @freezed
 class AuthBlocEvent with _$AuthBlocEvent {
-  const factory AuthBlocEvent.signInWithEmail(String email, String password) =_SignInWithEmail;
-  const factory AuthBlocEvent.signUpWithEmail(String email, String password) =_SignUpWithEmail;
+  // Вход
+  const factory AuthBlocEvent.signInWithEmail(
+      String email,
+      String password,
+      ) = _SignInWithEmail;
+
+  // Регистрация
+  const factory AuthBlocEvent.signUpWithEmail({
+    required String email,
+    required String password,
+    required String confirmPassword,
+  }) = _SignUpWithEmail;
+
+  // Выход
   const factory AuthBlocEvent.signOut() = _SignOut;
-  const factory AuthBlocEvent.sendPhoneCode({
-    required String phoneNumber,
-    required void Function(String verificationId) codeSent,
-    required void Function(AuthException e) onError,
-  }) = _SendPhoneCode;
 
-  const factory AuthBlocEvent.verifySmsCode({
-    required String verificationId,
-    required String smsCode,
-  }) = _VerifySmsCode;
+  // Удаление аккаунта (теперь с обязательным паролем для re-authentication)
+  const factory AuthBlocEvent.deleteAccount({
+    required String password,
+  }) = _DeleteAccount;
 
+  // Сброс пароля (отправка ссылки на почту)
+  const factory AuthBlocEvent.sendPasswordResetEmail(
+      String email,
+      ) = _SendPasswordResetEmail;
+
+  // Отправка письма для подтверждения почты
+  const factory AuthBlocEvent.sendEmailVerification() = _SendEmailVerification;
+
+  // Обновление профиля (используем также для reload состояния)
   const factory AuthBlocEvent.updateProfile({
     String? displayName,
     String? photoUrl,

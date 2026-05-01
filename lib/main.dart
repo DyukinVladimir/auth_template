@@ -7,16 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/di/init_dependencies.dart';
+import 'core/utils/app_bloc_observer.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await initDependencies();
+  Bloc.observer = AppBlocObserver();
 
   final authCubit = getIt<AuthCubit>();
   final authBloc = getIt<AuthBloc>();
