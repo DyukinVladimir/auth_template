@@ -63,7 +63,6 @@ class _LoginPageState extends State<LoginPage> {
         _passwordController.text,
       ));
     } else {
-      // Просто передаем всё в Блок
       context.read<AuthBloc>().add(AuthBlocEvent.signUpWithEmail(
         email: _emailController.text.trim(),
         password: _passwordController.text,
@@ -136,7 +135,6 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 16),
                       AuthTextField(
                         controller: _passwordController,
-                        // Исправлено: явная передача val
                         validators: [(val) => AuthValidators.password(val)],
                         label: 'Пароль',
                         showErrors: _showErrors,
@@ -157,7 +155,6 @@ class _LoginPageState extends State<LoginPage> {
                         AuthTextField(
                           controller: _confirmPasswordController,
                           validators: [
-                            // Добавляем скобки () в конце, чтобы вызвать валидатор!
                                 (val) => AuthValidators.confirmPassword(_passwordController.text)(val),
                           ],
                           label: 'Подтвердите пароль',
@@ -210,7 +207,6 @@ class _LoginPageState extends State<LoginPage> {
                                 AuthBlocEvent.sendPasswordResetEmail(
                                   email: email,
                                   onSuccess: () {
-                                    // Этот код выполнится ТОЛЬКО после успешной отправки письма
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text('Инструкции отправлены на почту!'),

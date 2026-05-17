@@ -50,7 +50,7 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSourceAb
   @override
   Future<UserModel> signUpWithEmail(String email, String password) async {
     try {
-      _logger.i('📝 DataSource: Creating account for $email');
+      _logger.i('DataSource: Creating account for $email');
 
       // Добавляем .timeout()
       final credential = await _auth.createUserWithEmailAndPassword(
@@ -63,10 +63,10 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSourceAb
       _logger.i('🎉 DataSource: Account created');
       return UserModel.fromFirebase(credential.user!);
     } on FirebaseAuthException catch (e, stackTrace) {
-      _logger.e('🛑 Firebase Error', error: e, stackTrace: stackTrace);
+      _logger.e(' Firebase Error', error: e, stackTrace: stackTrace);
       throw AuthException.fromFirebase(e);
     } catch (e, stackTrace) {
-      _logger.f('💥 Unknown Error', error: e, stackTrace: stackTrace);
+      _logger.f(' Unknown Error', error: e, stackTrace: stackTrace);
       rethrow;
     }
   }
@@ -123,14 +123,12 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSourceAb
       final user = _auth.currentUser;
       if (user == null) throw const AuthException('Пользователь не найден');
 
-      // 1. Сначала переподтверждаем личность
       AuthCredential credential = EmailAuthProvider.credential(
         email: user.email!,
         password: password,
       );
       await user.reauthenticateWithCredential(credential);
 
-      // 2. Только после успеха удаляем
       await user.delete();
     } on FirebaseAuthException catch (e) {
       throw AuthException.fromFirebase(e);

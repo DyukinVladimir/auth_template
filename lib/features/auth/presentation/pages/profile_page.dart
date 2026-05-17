@@ -11,7 +11,6 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-// Добавляем WidgetsBindingObserver для отслеживания состояния приложения
 class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
 
   @override
@@ -26,12 +25,9 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  // Магия происходит здесь
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Если пользователь вернулся в приложение (resumed)
     if (state == AppLifecycleState.resumed) {
-      // Вызываем обновление профиля, чтобы проверить статус подтверждения Email
       context.read<AuthBloc>().add(const AuthBlocEvent.updateProfile());
     }
   }
@@ -42,7 +38,6 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
     showDialog(
       context: context,
       builder: (dialogContext) {
-        // Оборачиваем в BlocBuilder, чтобы кнопка в диалоге знала о загрузке
         return BlocBuilder<AuthBloc, AuthBlocState>(
           builder: (context, state) {
             final isLoading = state.maybeWhen(loading: () => true, orElse: () => false);
@@ -76,7 +71,6 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
                     final password = controller.text.trim();
                     if (password.isNotEmpty) {
                       context.read<AuthBloc>().add(AuthBlocEvent.deleteAccount(password: password));
-                      // Диалог закроется сам через BlocListener ниже при успехе
                     }
                   },
                   child: isLoading
@@ -93,7 +87,6 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    // Выбираем только данные пользователя для перерисовки
     final user = context.select<AuthCubit, UserEntity?>(
           (cubit) => cubit.state.maybeWhen(
         authenticated: (user) => user,
@@ -122,7 +115,6 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
               SnackBar(content: Text(ex.message), backgroundColor: Colors.red),
             ),
             success: () {
-              // Если диалог был открыт (при удалении), закрываем его
               if (Navigator.canPop(context)) Navigator.pop(context);
 
               ScaffoldMessenger.of(context).showSnackBar(
@@ -180,9 +172,6 @@ class _ProfilePageState extends State<ProfilePage> with WidgetsBindingObserver {
   }
 }
 
-// Виджет _ProfileButton оставляем без изменений
-
-// Вспомогательный виджет для кнопок, чтобы код был чище
 class _ProfileButton extends StatelessWidget {
   final IconData icon;
   final String label;

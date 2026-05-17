@@ -4,7 +4,7 @@ class AuthButton extends StatelessWidget {
   const AuthButton({
     required this.onPressed,
     required this.text,
-    this.isLoading = false, // Добавили
+    this.isLoading = false,
     this.width,
     super.key,
   });
@@ -18,7 +18,7 @@ class AuthButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
-      height: 48, // Чуть выше для удобства нажатия
+      height: 48,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(

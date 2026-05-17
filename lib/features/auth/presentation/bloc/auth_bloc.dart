@@ -42,7 +42,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
 
           sendPasswordResetEmail: (e) => _handleAuthTask(emit, () async {
             await _repo.sendPasswordResetEmail(e.email);
-            e.onSuccess?.call(); // Вызываем только при успехе
+            e.onSuccess?.call();
           }),
 
           sendEmailVerification: (e) => _handleAuthTask(emit,
@@ -57,7 +57,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
           ),
         );
       },
-      transformer: droppable(), // Защита от спама кнопками
+      transformer: droppable(),
     );
   }
 

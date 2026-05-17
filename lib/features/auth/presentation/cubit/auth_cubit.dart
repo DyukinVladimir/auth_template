@@ -20,11 +20,9 @@ class AuthCubit extends Cubit<AuthCubitState> {
         }
       },
       onError: (error) {
-        // Если случилась ошибка в стриме, не даем приложению зависнуть
-        // Просто логируем или уводим в unauthenticated
         emit(const AuthCubitState.unauthenticated());
       },
-      cancelOnError: false, // КРИТИЧНО: стрим не должен закрываться при ошибке
+      cancelOnError: false,
     );
   }
 

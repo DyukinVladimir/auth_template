@@ -14,7 +14,6 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-    // Логируем переходы состояний (удобно для Cubit и Bloc)
     _logger.d('BLOC CHANGE in ${bloc.runtimeType}: \nFROM: ${change.currentState} \nTO: ${change.nextState}');
   }
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AuthTextField extends StatefulWidget {
   const AuthTextField({
     required this.controller,
-    this.onChanged, // Сделаем необязательным, чтобы не ругался
+    this.onChanged,
     this.keyboardType,
     this.obscureText,
     this.child,
@@ -14,7 +14,7 @@ class AuthTextField extends StatefulWidget {
     this.validators = const [],
     this.maxLength = 50,
     this.errorText,
-    this.enabled = true, // ДОБАВИЛИ: для блокировки при загрузке
+    this.enabled = true,
     super.key,
   });
 
@@ -25,13 +25,12 @@ class AuthTextField extends StatefulWidget {
   final bool? obscureText;
   final TextInputType? keyboardType;
   final bool isPassword;
-  final ValueChanged<String>? onChanged; // Сделали nullable
+  final ValueChanged<String>? onChanged;
   final bool showErrors;
-  // Исправили тип: теперь принимает String? и возвращает String?
   final List<String? Function(String?)> validators;
   final Widget? child;
   final int? maxLength;
-  final bool enabled; // Поле активности
+  final bool enabled;
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -47,7 +46,6 @@ class _AuthTextFieldState extends State<AuthTextField> {
   }
 
   String? _error() {
-    // Если Firebase вернул конкретную ошибку (errorText), показываем её в приоритете
     if (widget.errorText != null) return widget.errorText;
 
     if (!widget.showErrors || _focusNode.hasFocus) {
@@ -67,14 +65,14 @@ class _AuthTextFieldState extends State<AuthTextField> {
     return Focus(
       onFocusChange: (newFocus) => setState(() {}),
       child: TextFormField(
-        enabled: widget.enabled, // Применяем состояние активности
+        enabled: widget.enabled,
         obscureText: widget.obscureText ?? false,
         controller: widget.controller,
         focusNode: _focusNode,
         maxLength: widget.maxLength,
         keyboardType: widget.keyboardType,
         onChanged: (value) {
-          widget.onChanged?.call(value); // Безопасный вызов
+          widget.onChanged?.call(value);
           setState(() {});
         },
         decoration: InputDecoration(
@@ -87,10 +85,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
           errorBorder: _getBorder(true),
           focusedErrorBorder: _getBorder(true),
           errorText: _error(),
-          labelText: widget.label, // Используем стандартный labelText
+          labelText: widget.label,
           hintText: _focusNode.hasFocus ? '' : widget.hint,
           hintStyle: const TextStyle(color: Colors.grey),
-          fillColor: widget.enabled ? Colors.white : Colors.grey.shade100, // UX
+          fillColor: widget.enabled ? Colors.white : Colors.grey.shade100,
           filled: true,
         ),
       ),
